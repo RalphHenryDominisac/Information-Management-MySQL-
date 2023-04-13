@@ -1,0 +1,83 @@
+CREATE DATABASE premiere;
+USE premiere;
+
+
+-- Creating the tables:
+CREATE TABLE REP
+(REP_NUM CHAR(2) PRIMARY KEY,
+LAST_NAME CHAR(15), 
+FIRST_NAME CHAR(15),
+STREET CHAR(15),
+CITY CHAR(15),
+STATE CHAR(2),
+ZIP CHAR(5),
+COMMISSION DECIMAL(7,2),
+RATE DECIMAL(3, 2) );
+
+CREATE TABLE CUSTOMER
+(CUSTOMER_NUM CHAR(3) PRIMARY KEY,
+CUSTOMER_NAME CHAR(35) NOT NULL,
+STREET CHAR(15),
+CITY CHAR(15),
+STATE CHAR(2),
+ZIP CHAR(5),
+BALANCE DECIMAL(8,2),
+CREDIT_LIMIT DECIMAL(8,2),
+REP_NUM CHAR(2) );
+
+
+CREATE TABLE ORDERS
+(ORDER_NUM CHAR(5) PRIMARY KEY,
+ORDER_DATE DATE,
+CUSTOMER_NUM CHAR(3) );
+
+
+
+CREATE TABLE PART
+(PART_NUM CHAR(4) PRIMARY KEY,
+DESCRIPTION CHAR(15),
+ON_HAND DECIMAL(4,0),
+CLASS CHAR(2), 
+WAREHOUSE CHAR(1),
+PRICE DECIMAL(6,2) );
+
+
+CREATE TABLE ORDER_LINE
+(ORDER_NUM CHAR(5),
+PART_NUM CHAR(4),
+NUM_ORDERED DECIMAL(3,0),
+QUOTED_PRICE DECIMAL(6,2),
+PRIMARY KEY (ORDER_NUM, PART_NUM) );
+
+
+
+
+-- Inserting data to tables
+INSERT INTO rep (REP_NUM, LAST_NAME, FIRST_NAME, STREET, CITY, STATE, ZIP, COMMISSION, RATE)
+ VALUES 
+  ('20', 'Kaiser', 'Valerie', '624 Randall', 'Grove', 'FL', '33321', 20542.50, 0.05),
+  ('35', 'Hull', 'Richard', '532 Jackson', 'Sheldon', 'FL', '33553', 39216.00, 0.07),
+  ('65', 'Perez', 'Juan', '1626 Taylor', 'Fillmore', 'FL', '33336', 23487.00, 0.05);
+  
+  
+INSERT INTO part (PART_NUM, DESCRIPTION, ON_HAND, CLASS, WAREHOUSE, PRICE)
+ VALUES 
+  ('AT94', 'Iron', 50, 'HW', '3', 24.95),
+  ('BV06', 'Home Gym', 45, 'SG', '2', 794.95),
+  ('CD52', 'Microwave Oven', 32, 'AP', '1', 165.00),
+  ('DL71', 'Cordless Drill', 21, 'HW', '3', 129.95),
+  ('DR93', 'Gas Range', 8, 'AP', '2', 495.00),
+  ('DW11', 'Washer', 12, 'AP', '3', 399.99),
+  ('FD21', 'Stand Mixer', 22, 'HW', '3', 159.95),
+  ('KL62', 'Dryer', 12, 'AP', '1', 349.95),
+  ('KT03', 'Dishwasher', 8, 'AP', '3', 595.00),
+  ('KV29', 'Treadmill', 9, 'SG', '2', 1390.00);
+
+
+SELECT * FROM rep;
+SELECT * FROM part;
+
+
+
+
+

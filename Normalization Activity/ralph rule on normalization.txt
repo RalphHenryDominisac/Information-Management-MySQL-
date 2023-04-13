@@ -1,0 +1,18 @@
+1NF:
+Make each rows of the table unique (make a special column for them and set as primary key)
+
+
+
+2NF:
+Separate repeating columns and non-repeating columns, then remove partial dependencies.
+                                                             (this is where you form foreign keys out of them and set those foreign keys as primary keys on a separate table.)
+
+
+3NF:
+ 
+    Remove transitive dependencies (tables must contain columns that depend only on its primary key, not on another column also)
+
+
+
+
+
