@@ -1,0 +1,83 @@
+USE tennis;
+
+-- 1
+SELECT
+	t.DIVISION,
+    t.TEAMNO,
+    SUM(m.WON) AS TOTAL_NUM_SETS_WON
+    
+FROM teams t
+JOIN matches m
+	ON t.TEAMNO = m.TEAMNO
+GROUP BY TEAMNO;
+
+
+
+-- 2
+  SELECT
+	  p.BIRTH_DATE AS ALL_DATES
+  FROM players p
+  
+  UNION
+  
+  SELECT 
+	pl.PAYMENT_DATE
+  FROM penalties pl;
+ 
+ 
+ -- 3
+SELECT 
+	PLAYERNO, 
+	AVG(AMOUNT) AS AVERAGE_PENALTY_AMOUNT, 
+    COUNT(*) NUM_OF_PENALTIES
+FROM penalties pl
+GROUP BY PLAYERNO;
+
+-- 4
+SELECT
+	TEAMNO,
+    COUNT(*) AS MATCHES_PLAYED
+
+FROM matches m
+WHERE TEAMNO IN (SELECT TEAMNO FROM TEAMS  INNER JOIN players  ON TEAMS.PLAYERNO = PLAYERS.PLAYERNO    
+                 WHERE TOWN = 'Eltham')
+GROUP BY TEAMNO;
+
+
+-- 5
+SELECT
+	p.NAME AS CAPTAIN_NAME
+
+FROM players p
+JOIN teams t
+	ON p.PLAYERNO = t.PLAYERNO;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+ 
+ 
+
+
+
+
+
+

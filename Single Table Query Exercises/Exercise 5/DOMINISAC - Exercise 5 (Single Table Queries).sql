@@ -1,0 +1,193 @@
+USE tennis;     -- erase this once done
+-- 1
+SELECT
+	p.PLAYERNO,
+    YEAR(p.BIRTH_DATE) AS BIRTH_YEAR
+
+
+FROM players p
+WHERE YEAR(p.BIRTH_DATE) = '1962' OR YEAR(p.BIRTH_DATE) = '1963' OR  YEAR(p.BIRTH_DATE) = '1970';
+
+-- 2
+SELECT
+	p.NAME,
+    p.PLAYERNO
+    
+FROM players p
+WHERE p.NAME REGEXP '^[B]';
+
+
+-- 3
+SELECT
+	p.NAME,
+    p.PLAYERNO
+    
+FROM players p
+WHERE p.NAME LIKE '%e_';
+
+
+-- 4
+SELECT
+	COUNT(DISTINCT(p.TOWN)) AS DIFFERENT_TOWN_NAMES
+
+
+FROM players p;
+
+
+-- 5
+SELECT
+	COUNT(DISTINCT(p.TOWN)) AS DIFFERENT_TOWN_NAMES,
+    COUNT(DISTINCT(p.SEX)) AS NUMBER_OF_SEXES_REPRESENTED
+    
+FROM players p;
+
+
+-- 6
+SELECT
+	 MAX(pl.AMOUNT) AS HIGHEST_PENALTY
+
+
+FROM penalties pl;
+
+-- 7
+SELECT
+	 MIN(pl.AMOUNT) AS LOWEST_PENALTY
+
+FROM penalties pl
+JOIN players p
+	ON pl.PLAYERNO = p.PLAYERNO
+WHERE p.TOWN = 'Stratford';
+
+
+-- 8
+SELECT
+	 SUM(pl.AMOUNT) AS TOTAL_PENALTIES_INGLEWOOD
+
+FROM penalties pl
+JOIN players p
+	ON pl.PLAYERNO = p.PLAYERNO
+WHERE p.TOWN = 'Inglewood';
+
+
+
+-- 9
+SELECT
+	 AVG(pl.AMOUNT) AS AVERAGE_PENALTIES_OF_PLAYER_44
+
+FROM penalties pl
+WHERE pl.PLAYERNO = 44;
+
+
+
+-- 10
+SELECT
+	DISTINCT(p.TOWN),
+    COUNT(*) AS NUM_OF_PLAYERS
+
+FROM players p
+GROUP BY p.TOWN;
+
+
+-- 11
+SELECT
+	t.TEAMNO,
+    COUNT(m.MATCHNO) AS NUM_OF_MATCHES_PLAYED,
+    SUM(m.WON) AS NUM_OF_SETS_WON
+    
+FROM teams t
+JOIN matches m
+	ON t.TEAMNO = m.TEAMNO
+GROUP BY TEAMNO;
+
+
+-- 12
+SELECT
+	pl.PLAYERNO,
+    SUM(pl.AMOUNT) AS TOTAL_PENALTIES
+	
+FROM penalties pl
+GROUP BY pl.PLAYERNO
+HAVING TOTAL_PENALTIES > 150;
+
+-- 13
+SELECT  
+    pl.PLAYERNO,
+    SUM(pl.AMOUNT) AS TOTAL_PENALTIES
+       
+FROM penalties pl
+JOIN teams t
+	ON pl.PLAYERNO = t.PLAYERNO
+GROUP BY PLAYERNO
+HAVING TOTAL_PENALTIES > 80;
+
+-- 14
+SELECT
+	p.PLAYERNO
+
+
+FROM players p
+WHERE YEAR(p.BIRTH_DATE) = (SELECT YEAR(p.BIRTH_DATE) FROM players p WHERE p.PLAYERNO = 27);
+
+-- 15
+SELECT
+	pl.PAYMENTNO
+    
+FROM penalties pl
+WHERE pl.AMOUNT > (SELECT pl.AMOUNT FROM penalties pl WHERE pl.PAYMENTNO = '4');
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
